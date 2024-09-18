@@ -1,1 +1,36 @@
 
+Once the EKS cluster gets created, we need to access it from the bastion machine. So install the packages below and access the cluster. 
+
+apt -y install unzip curl
+
+awscli: 
+
+apt -y install unzip curl
+
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+
+unzip awscliv2.zip
+
+sudo ./aws/install
+
+aws –version
+
+Kubectl: 
+
+curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.21.2/2021-07-05/bin/linux/amd64/kubectl
+
+chmod +x ./kubectl
+
+sudo mv ./kubectl /usr/local/bin
+
+kubectl --version
+
+# Update the kube config file on the bastion server
+
+aws eks --region us-west-2 update-kubeconfig --name eks-cluster
+
+# check if you are able to list the nodes
+
+Kubectl get nodes -owide
+
+# Create deployment service to check your application is running on EKS cluster is not. 
